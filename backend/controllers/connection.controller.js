@@ -86,10 +86,12 @@ export const acceptConnectionRequest = async (req, res) => {
 
 		try {
 			await sendConnectionAcceptedEmail(senderEmail, senderName, recipientName, profileUrl);
-		} catch (error) {
+		} 
+		catch (error) {
 			console.error("Error in sendConnectionAcceptedEmail:", error);
 		}
-	} catch (error) {
+	} 
+	catch (error) {
 		console.error("Error in acceptConnectionRequest controller:", error);
 		res.status(500).json({ message: "Server error" });
 	}

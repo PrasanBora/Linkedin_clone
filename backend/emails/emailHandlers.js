@@ -62,3 +62,8 @@ export const sendConnectionAcceptedEmail = async (senderEmail, senderName, recip
 		});
 	} catch (error) {}
 };
+
+// sendWelcomeEmail("boraharsh2@gmail.com","namepb","someurl");
+// sendCommentNotificationEmail ("boraharsh2@gmail.com","namepb","someurl","","");
+//  sendConnectionAcceptedEmail("prasanbora23@gmail.com","namepb","someurl","");
+// console.log("debugging");

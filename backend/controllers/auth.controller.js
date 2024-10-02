@@ -49,6 +49,8 @@ export const signup = async (req, res) => {
 
 		const profileUrl = process.env.CLIENT_URL + "/profile/" + user.username;
 
+// sending new account email 
+
 		try {
 			await sendWelcomeEmail(user.email, user.name, profileUrl);
 		} 
@@ -90,7 +92,8 @@ export const login = async (req, res) => {
 		});
 
 		res.json({ message: "Logged in successfully" });
-	} catch (error) {
+	} 
+	catch (error) {
 		console.error("Error in login controller:", error);
 		res.status(500).json({ message: "Server error" });
 	}
