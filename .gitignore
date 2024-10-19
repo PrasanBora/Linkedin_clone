@@ -1,4 +1,5 @@
-
+package-lock.json
+test_email.js
 .env
 node_modules
 test_email.js
@@ -19,5 +20,4 @@ dist-ssr
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
-package-lock.json
-test_email
+
