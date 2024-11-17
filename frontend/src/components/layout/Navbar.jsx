@@ -3,7 +3,7 @@ import { axiosInstance } from "../../lib/axios";
 import { Link } from "react-router-dom";
 import { Bell, Home, LogOut, User, Users } from "lucide-react";
 import React, { useState } from "react";
-import axios from "axios";
+
 
 const Navbar = () => {
 	const { data: authUser } = useQuery({ queryKey: ["authUser"] });
@@ -31,16 +31,22 @@ const Navbar = () => {
 		},
 	});
 
+	//handle search implementation
 	const handleSearch = async (e) => {
 		e.preventDefault();
 		try {
-			console.log("reporting from search " , query);
-		  const res = await axios.get(`/search?q=${query}`);
-		    console.log(res.data);
-		  setResults(res.data);
+			const res = await axiosInstance.get(`/search?q=${query}`);
+			if (res.data.length === 0) {
+				console.log('No user found with this name');
+				alert('No user found with this name'); 
+				// error 
+			  } else {
+				setResults(res.data);
+			  }
 		} 
 		catch (error) {
 		  console.error("Error searching users:", error);
+		  setResults([]);
 		}
 	  };
 
@@ -70,8 +76,15 @@ const Navbar = () => {
 							/> 
 								{results.length > 0 && (
 									<div className="absolute bg-white border border-gray-300 w-full mt-1 rounded-md z-10">
-										{/* {results.map((user) => (
+										{/* {console.log(results )} */}
+
+										{results.map((user) => (
 										<div key={user._id} className="p-2 flex items-center hover:bg-gray-100">
+											 <a 
+												key={user._id} 
+												href={`/profile/${user.username}`} // Replace with the actual path to the user's profile
+												className="block p-2 flex items-center hover:bg-gray-100"
+											>
 											<img
 											src={user.profilePicture || "/default-profile.png"}
 											alt={user.username}
@@ -81,10 +94,13 @@ const Navbar = () => {
 											<p className="font-semibold">{user.name}</p>
 											<p className="text-sm text-gray-600">{user.username}</p>
 											</div>
+											</a>
 										</div>
-										))} */}
+										))}
+
 									</div>
-									)}
+								)}
+
 					        </form> 
 							) :<></>}
 
